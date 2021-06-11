@@ -89,7 +89,7 @@ class CreateLink(graphene.Mutation):
         description = graphene.String()
 
     def mutate(self, info, url, description):
-        user = info.context.user or None
+        user = info.context.user if info.context.user.is_authenticated else None
 
         link = Link(
             url=url,
